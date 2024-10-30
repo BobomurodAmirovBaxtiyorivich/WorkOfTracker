@@ -28,8 +28,3 @@
 </body>
 
 </html>
-
-<?php
-$conn = new PDO("mysql:host=localhost;dbname=work_of_tracker", 'root', 'My$par0l');
-
-$sql = "SELECT * FROM work_time";
