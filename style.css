@@ -1,3 +1,26 @@
-.a{
+.a {
     width: 40%;
+}
+
+body {
+    background-color: black;
+}
+
+.row-width {
+    width: 50%;
+    margin-left: 270px;
+    background-color: gold;
+    border-radius: 20px;
+}
+
+.container {
+    text-align: center;
+}
+
+.color {
+    color: red;
+}
+
+.h1-color {
+    color: gold;
 }

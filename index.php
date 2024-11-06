@@ -1,11 +1,14 @@
 <?php
-$conn = new PDO("mysql:host=localhost;dbname=work_of_tracker", 'root', 'My$par0l');
 
-$query = "SELECT * FROM work_time ORDER BY id DESC";
+require "DB.php";
 
-$stmt = $conn->query($query);
+require "query.php";
 
-$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+$db = new DB();
+
+$query = new Query($db->pdo);
+
+$result = $query->select();
 
 const WORK_TIME = 8;
 
@@ -19,30 +22,7 @@ const WORK_TIME = 8;
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Work of tracker</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <style>
-        body {
-            background-color: black;
-        }
-
-        .row-width {
-            width: 50%;
-            margin-left: 270px;
-            background-color: gold;
-            border-radius: 20px;
-        }
-
-        .container {
-            text-align: center;
-        }
-
-        .color {
-            color: red;
-        }
-
-        .h1-color {
-            color: gold;
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
