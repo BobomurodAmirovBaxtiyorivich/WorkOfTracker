@@ -2,7 +2,7 @@
 
 require "DB.php";
 
-require "query.php";
+require "WorkTime.php";
 
 $db = new DB();
 
@@ -25,10 +25,14 @@ if (isset($_POST['sub'])) {
         $arrived_at = $start->format("d.m.Y H:i");
         $leaved_at = $end->format("d.m.Y H:i");
 
-        $query = new Query($db->pdo);
+        $query = new WorkTime($db->pdo);
 
-        $query->insert($name, $arrived_at, $leaved_at, $total);
+        $query->store($name, $arrived_at, $leaved_at, $total);
 
         header("location: index.php");
+    } else {
+        header("Location: index.php");
     }
+} else {
+    header("Location: index.php");
 }

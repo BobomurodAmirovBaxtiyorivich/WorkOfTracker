@@ -1,6 +1,6 @@
 <?php
 
-class Query
+class WorkTime
 {
     public $stmt;
     public $db;
@@ -19,7 +19,7 @@ class Query
         return $this->stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function insert($name, $arrived_at, $leaved_at, $total){
+    public function store($name, $arrived_at, $leaved_at, $total){
         $this->query = "INSERT INTO work_time(name, arrived_at, leaved_at, required_of) VALUES(:name, :arrived_at, :leaved_at, :required_of)";
 
         $this->stmt = $this->conn->prepare($this->query);
@@ -30,5 +30,11 @@ class Query
         $this->stmt->bindParam(':required_of', $total);
 
         $this->stmt->execute(); 
+    }
+
+    public function total_required_of(string $name){
+        $this->query = "SELECT required_of FROM work_time WHERE name = '{$name}'";
+        $this->stmt = $this->conn->query($this->query);
+        return $this->stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 }
