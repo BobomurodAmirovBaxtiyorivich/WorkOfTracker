@@ -42,7 +42,15 @@ const WORK_TIME = 8;
                     <label class="color" for="leaved_at" class="form-label">Leaved at</label>
                     <input type="datetime-local" class="form-control" name="leaved_at" id="leaved_at" aria-describedby="emailHelp">
                 </div>
-                <button type="submit" name="sub" class="btn btn-primary">Submit</button>
+                <div class="mb-3">
+                    <button type="submit" name="sub" class="btn btn-primary">Submit</button>
+                </div>
+                <div class="mb-3">
+                    <button form="export" type="submit" class="btn btn-success">Export</button>
+                </div>
+            </form>
+            <form action="" id="export" method="POST">
+                <input type="text" name="export" value="true" hidden>
             </form>
         </div>
         <h1 align="center" class="text-warning mt-3">Working hour: <?= WORK_TIME ?></h1>
@@ -69,7 +77,7 @@ const WORK_TIME = 8;
                             <td><?= $value['leaved_at'] ?></td>
                             <td><?= date("H:i", $value['required_of']) ?></td>
                             <td><?= WORK_TIME ?></td>
-                            <td><a href="total.php?name=<?= $value['name']?>" class="btn btn-info">Total</a></td>
+                            <td><a href="total.php?name=<?= $value['name'] ?>" class="btn btn-info">Total</a></td>
                         </tr>
                     <?php }
                     ?>
