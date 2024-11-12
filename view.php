@@ -8,7 +8,19 @@ $db = new DB();
 
 $query = new WorkTime($db->pdo);
 
-$result = $query->select();
+$offset = isset($_GET['offset']) ? (int)$_GET['offset'] : 1;
+
+if (isset($_GET['next'])) {
+    $offset += 1;
+}
+
+if (isset($_GET['previous']) && $offset >= 2) {
+    $offset -= 1;
+}
+
+$result = $query->panigation($offset);
+
+$pages = $query->countPages();
 
 const WORK_TIME = 8;
 
@@ -83,6 +95,24 @@ const WORK_TIME = 8;
                     ?>
                 </tbody>
             </table>
+            <nav aria-label="Page navigation example">
+                <ul class="pagination">
+                    <?php 
+                    $disabled = $offset <= 1 ? "disabled" : "";
+
+                    $disabled2 = $offset >= $pages ? "disabled" : "";
+                    ?>
+                    <li class="page-item <?= $disabled?>"><a class="page-link" href="view.php?previous=1">Previous</a></li>
+                    <?php
+                    for ($i = 1; $i <= $pages; $i++) {
+                        $active = $offset == $i ? "active" : "";
+                        ?>
+                        <li class="page-item <?= $active?>"><a class="page-link" href="view.php?offset=<?= $i ?>"><?= $i ?></a></li>
+                    <?php }
+                    ?>
+                    <li class="page-item <?= $disabled2?>"><a class="page-link" href="view.php?next=1">Next</a></li>
+                </ul>
+            </nav>
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
